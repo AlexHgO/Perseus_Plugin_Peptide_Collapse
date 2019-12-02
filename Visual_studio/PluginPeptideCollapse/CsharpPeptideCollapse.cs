@@ -14,7 +14,7 @@ namespace PluginPeptideCollapse
     {
         public override string Name => "Peptide collapse v1.4.1";
         public override string Description => "Collapse peptides with shared sequence but different modifications into consensus sequence. Further allows stoichiometry calculation.";
-
+        
         protected override bool TryGetCodeFile(Parameters param, out string codeFile)
         {
             byte[] code = (byte[])global::PluginPeptideCollapse.Properties.Resources.ResourceManager.GetObject("RcodePeptideCollapse");
