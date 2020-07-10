@@ -12,7 +12,7 @@ namespace PluginPeptideCollapse
 {
     public class CsharpPeptideCollapse : PluginInterop.R.MatrixProcessing
     {
-        public override string Name => "Peptide collapse v1.4.1";
+        public override string Name => "Peptide collapse v1.4.2";
         public override string Description => "Collapse peptides with shared sequence but different modifications into consensus sequence. Further allows stoichiometry calculation.";
         
         protected override bool TryGetCodeFile(Parameters param, out string codeFile)
@@ -181,7 +181,7 @@ namespace PluginPeptideCollapse
 
 
 
-            var PTMTypesParam = new StringParam("Variable PTMs, target PTM first", "[Phospho (STY)];[Deamidation (NQ)];[Oxidation (M)]")
+            var PTMTypesParam = new StringParam("Variable PTMs, target PTM first", "[Phospho (STY)];[Deamidation (NQ)];[Oxidation (M)];[Carbamidomethyl (C)]")
             {
                 Help = "List PTMs as listed in EG.PrecursorId, separated by semicolon. If target site- or target peptide-level collapse is performed, " +
                 "target PTM needs to be listed first."
