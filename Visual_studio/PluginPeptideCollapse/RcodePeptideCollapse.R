@@ -1044,9 +1044,10 @@ if(par.cond == 0L){
 sub_vec <- data[, round(quantile(1:length(unique(PTM_collapse_key)), probs = seq(0,1,length.out = par.CPU+1)[-(par.CPU+1)]),0)]
 
 #create PTM_subgrp column based on sub_vec, which marks groups of rows to be subset into lists for parallel processing
-data[, PTM_subgrp := data[, .(PTM_grp_nr = rep(.GRP, .N)), by=PTM_collapse_key #create PTM_collapse_key group numbers
-                          ][, .(PTM_grp_test = c(.BY %in% sub_vec, rep(F, .N-1))), by=PTM_grp_nr #mark each first row of PTM_grp_nr that matches vec as T
-                            ][, cumsum(PTM_grp_test)] ] #create PTM_subgrp column
+PTM_subgrp_vec <- data[, .(PTM_grp_nr = rep(.GRP, .N)), by=PTM_collapse_key #create PTM_collapse_key group numbers
+                       ][, .(PTM_grp_test = c(.BY %in% sub_vec, rep(F, .N-1))), by=PTM_grp_nr #mark each first row of PTM_grp_nr that matches vec as T
+                         ][, cumsum(PTM_grp_test)]
+data[, PTM_subgrp := PTM_subgrp_vec] #create PTM_subgrp column
 
 #create subdt: 8 (=number of cores) sub-data tables within list to be passed into function separately
 subdt <- split(data[, .SD, .SDcols = c(keep, "PTM_subgrp")], by="PTM_subgrp")
@@ -1366,7 +1367,7 @@ if(par.level==1 & if(exists("par.level.stoich")){par.level.stoich == 0}else{F}){
     #to avoid singularity, need to have overfit -> at least as many valid value matches over all peptides as conditions
     #eg, if we have three occseq peptide variants, we need at least 3 conditions with complete matches over all occseq peptide variants!
     #initiate logical selv vector which will define number of rows that can be used for rlm modeling via TRUE, and excludes duplicate peptide rows
-    selv <- !duplicated(x)
+    selv <- !duplicated(as.data.frame(x))
     #tried to solve problem with duplicate rows leading to singularity, but also kicks out working rows -> disregarded for now, using error trap instead
     # if(length(which(apply(x, 2, function(y) !any(duplicated(y)) )))>=nrow(x)){
     #   selv <- !duplicated(x)

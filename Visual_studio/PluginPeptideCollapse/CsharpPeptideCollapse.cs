@@ -12,7 +12,7 @@ namespace PluginPeptideCollapse
 {
     public class CsharpPeptideCollapse : PluginInterop.R.MatrixProcessing
     {
-        public override string Name => "Peptide collapse v1.4.3";
+        public override string Name => "Peptide collapse v1.4.4";
         public override string Description => "Collapse peptides with shared sequence but different modifications into consensus sequence. Further allows stoichiometry calculation.";
         
         protected override bool TryGetCodeFile(Parameters param, out string codeFile)
