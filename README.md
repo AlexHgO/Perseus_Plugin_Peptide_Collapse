@@ -1,4 +1,10 @@
-# Perseus Plugin Peptide Collapse
+# Perseus Plugin Peptide Collapse (RETIRED)
+
+THIS REPOSITORY IS RETIRED AND NO LONGER MAINTAINED
+
+It has been more than five years since the tool was published, and I'm grateful that it proved useful for so many proteomics users. Since I am no longer employed in academia, the code does not reflect my current standards of quality and Spectronaut now features native site and stoichiometry reports that are actively maintained, I strongly recommend not depending on this plug-in any longer. Thank you for your understanding.
+
+ORIGINAL README:
 
 This plugin for Perseus allows its users to generate MaxQuant-like site-level, PTM-localized peptide-level and “modification specific” peptide-leveloutput from Spectronaut PTM data, as described in [Bekker-Jensen et al 2019](https://www.biorxiv.org/content/10.1101/657858v1). Furthermore, it allows the calculation of stoichiometry values based on the linear model algorithm as described in [Hogrebe et al 2018](https://www.nature.com/articles/s41467-018-03309-6).
 
